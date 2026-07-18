@@ -77,13 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
+      { title: "Finding Trails" },
       {
         name: "description",
         content:
           "Finding Trails curates premium trekking expeditions and cultural adventures across the Sahyadri and Himalayas. Built for the wild.",
       },
-      { property: "og:title", content: "Lovable App" },
+      { property: "og:title", content: "Finding Trails" },
       {
         property: "og:description",
         content:
@@ -91,7 +91,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Lovable App" },
+      { name: "twitter:title", content: "Finding Trails" },
       { name: "twitter:description", content: "Finding Trails curates premium trekking expeditions and cultural adventures across the Sahyadri and Himalayas. Built for the wild." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d6d986e5-cd1e-4e04-9a79-9f51c38823ba/id-preview-f8a04cea--88f9602d-ee7c-4893-9f22-cee7bfb07519.lovable.app-1784327554792.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d6d986e5-cd1e-4e04-9a79-9f51c38823ba/id-preview-f8a04cea--88f9602d-ee7c-4893-9f22-cee7bfb07519.lovable.app-1784327554792.png" },
