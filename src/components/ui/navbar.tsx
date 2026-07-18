@@ -63,7 +63,7 @@ export default function Navbar({
       <nav className="relative flex items-center justify-between gap-4">
         {/* Logo */}
         <a href={logo.url} className="flex shrink-0 items-center">
-          <img src={logo.src} alt={logo.alt} className="h-14 w-auto object-contain md:h-16" />
+          <img src={logo.src} alt={logo.alt} className="h-16 w-auto object-contain md:h-20" />
         </a>
 
         {/* Centered pill (desktop) */}
@@ -125,7 +125,7 @@ export default function Navbar({
               <SheetHeader>
                 <SheetTitle>
                   <a href={logo.url} className="flex items-center">
-                    <img src={logo.src} alt={logo.alt} className="h-12 w-auto object-contain" />
+                    <img src={logo.src} alt={logo.alt} className="h-16 w-auto object-contain" />
                   </a>
                 </SheetTitle>
               </SheetHeader>

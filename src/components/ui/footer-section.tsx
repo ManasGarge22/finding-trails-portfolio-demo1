@@ -14,7 +14,11 @@ export function SiteFooter() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand + newsletter */}
           <div className="relative">
-            <img src={logoColor} alt="Finding Trails" className="mb-4 h-16 w-auto object-contain" />
+            <img
+              src={logoColor}
+              alt="Finding Trails"
+              className="mb-4 h-24 w-auto object-contain md:h-28"
+            />
             <p className="mb-6 max-w-sm text-muted-foreground">
               Curated trekking expeditions across the Sahyadri and Himalayas. Join our list for
               upcoming treks and stories from the trail.
