@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import rappellerImg from "@/assets/rappeller.png";
-import logoImg from "@/assets/finding-trails-logo.png";
+import logoColor from "@/assets/finding-trails-logo-color.png";
+import logoWhite from "@/assets/finding-trails-logo-white.png";
 import Navbar from "@/components/ui/navbar";
 
 export const Route = createFileRoute("/")({
@@ -701,9 +702,7 @@ function Footer() {
     <footer className="bg-[color:var(--color-forest-deep)] text-[color:var(--color-earth-linen)] w-full py-16 border-t border-[color:var(--color-granite-gray)]">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-4 md:px-10 max-w-[1280px] mx-auto">
         <div className="md:col-span-2">
-          <h2 className="font-display font-extrabold text-2xl text-[color:var(--color-sunset-vivid)] mb-4">
-            Finding Trails
-          </h2>
+          <img src={logoWhite} alt="Finding Trails" className="h-16 w-auto object-contain mb-4" />
           <p className="max-w-sm text-white/70 mb-6">
             Built for the wild. Curating premium expedition experiences in the Sahyadri and
             Himalayas.
@@ -805,23 +804,16 @@ function Index() {
   return (
     <>
       <Rappeller />
-      <header className="fixed top-0 inset-x-0 z-50 bg-[color:var(--color-earth-linen)]/85 backdrop-blur-xl border-b border-[color:var(--color-outline-variant)]">
+      <header className="fixed top-0 inset-x-0 z-50">
         <Navbar
-          showCart={false}
-          logo={{
-            url: "#top",
-            src: logoImg,
-            alt: "Finding Trails",
-            title: "Finding Trails",
-          }}
+          logo={{ url: "#top", src: logoColor, alt: "Finding Trails" }}
           menu={[
             { title: "Trails", url: "#trails" },
             { title: "Upcoming", url: "#upcoming" },
             { title: "Gallery", url: "#gallery" },
             { title: "About Us", url: "#about" },
           ]}
-          mobileExtraLinks={[]}
-          auth={{ signup: { text: "Book a Trek", url: "#upcoming" } }}
+          cta={{ text: "Book a Trek", url: "#upcoming" }}
         />
       </header>
       <main>

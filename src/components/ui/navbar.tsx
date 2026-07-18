@@ -1,52 +1,14 @@
-import {
-  Book,
-  Menu,
-  ShoppingCart,
-  Search,
-  Palette,
-  GraduationCap,
-  History,
-  Users,
-  LayoutDashboard,
-  Sparkles,
-  Boxes,
-} from "lucide-react";
-import * as React from "react";
+import { useEffect, useState } from "react";
+import { Menu } from "lucide-react";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
-import {
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
+import logoColor from "@/assets/finding-trails-logo-color.png";
 
-import logoImg from "@/assets/finding-trails-logo.png";
-
-interface MenuItem {
+interface NavItem {
   title: string;
   url: string;
-  description?: string;
-  icon?: React.ReactNode;
-  items?: MenuItem[];
 }
 
 interface NavbarProps {
@@ -54,337 +16,148 @@ interface NavbarProps {
     url: string;
     src: string;
     alt: string;
-    title: string;
   };
-  menu?: MenuItem[];
-  mobileExtraLinks?: {
-    name: string;
+  menu?: NavItem[];
+  cta?: {
+    text: string;
     url: string;
-  }[];
-  auth?: {
-    login?: {
-      text: string;
-      url: string;
-    };
-    signup: {
-      text: string;
-      url: string;
-    };
   };
-  /** Show the search icon + command-palette popup. Default: true. */
-  showSearch?: boolean;
-  /** Show the shopping-cart icon. Default: true. */
-  showCart?: boolean;
 }
 
 export default function Navbar({
-  logo = {
-    url: "/",
-    src: logoImg,
-    alt: "Finding Trails logo",
-    title: "Finding Trails",
-  },
-
+  logo = { url: "#top", src: logoColor, alt: "Finding Trails" },
   menu = [
-    { title: "Home", url: "#" },
-    {
-      title: "Blocks",
-      url: "#",
-      items: [
-        {
-          title: "UI Elements",
-          description: "Reusable UI components to build your app faster",
-          icon: <Boxes className="size-5 shrink-0" />,
-          url: "#",
-        },
-        {
-          title: "Templates",
-          description: "Prebuilt layouts for dashboards and landing pages",
-          icon: <LayoutDashboard className="size-5 shrink-0" />,
-          url: "#",
-        },
-        {
-          title: "Icons",
-          description: "Beautiful lucide-react icons ready to use",
-          icon: <Sparkles className="size-5 shrink-0" />,
-          url: "#",
-        },
-        {
-          title: "Themes",
-          description: "Customizable design system with dark mode support",
-          icon: <Palette className="size-5 shrink-0" />,
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Pages",
-      url: "#",
-      items: [
-        {
-          title: "Documentation",
-          description: "Get started with guides, API references & examples",
-          icon: <Book className="size-5 shrink-0" />,
-          url: "#",
-        },
-        {
-          title: "Community",
-          description: "Join our discussions and connect with other devs",
-          icon: <Users className="size-5 shrink-0" />,
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          description: "Step-by-step guides to learn quickly",
-          icon: <GraduationCap className="size-5 shrink-0" />,
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          description: "See what's new and improved in every release",
-          icon: <History className="size-5 shrink-0" />,
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Forms",
-      url: "#",
-    },
-    {
-      title: "Blog",
-      url: "#",
-    },
+    { title: "Trails", url: "#trails" },
+    { title: "Upcoming", url: "#upcoming" },
+    { title: "Gallery", url: "#gallery" },
+    { title: "About Us", url: "#about" },
   ],
-
-  mobileExtraLinks = [
-    { name: "Press", url: "#" },
-    { name: "Contact", url: "#" },
-    { name: "Community", url: "#" },
-    { name: "Changelog", url: "#" },
-  ],
-
-  auth = {
-    login: { text: "Sign in", url: "#" },
-    signup: { text: "Get Started", url: "#" },
-  },
-  showSearch = true,
-  showCart = true,
+  cta = { text: "Book a Trek", url: "#upcoming" },
 }: NavbarProps) {
-  const [openSearch, setOpenSearch] = React.useState(false);
+  const [active, setActive] = useState(menu[0]?.url ?? "");
+
+  // Scroll-spy: highlight the link whose section is currently in view.
+  useEffect(() => {
+    const sections = menu
+      .map((m) => m.url)
+      .filter((u) => u.startsWith("#") && u.length > 1)
+      .map((u) => document.getElementById(u.slice(1)))
+      .filter((el): el is HTMLElement => el !== null);
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive("#" + visible.target.id);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.25, 0.5, 1] },
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, [menu]);
 
   return (
-    <section className="py-4">
-      <div className="container mx-auto px-4">
-        {/* Desktop Navbar */}
-        <nav className="hidden justify-between lg:flex">
-          <div className="flex items-center gap-6">
-            <a href={logo.url} className="flex items-center gap-2">
-              <img src={logo.src} className="w-8" alt={logo.alt} />
+    <div className="mx-auto max-w-[1280px] px-4 py-3 md:px-10">
+      <nav className="relative flex items-center justify-between gap-4">
+        {/* Logo */}
+        <a href={logo.url} className="flex shrink-0 items-center">
+          <img src={logo.src} alt={logo.alt} className="h-14 w-auto object-contain md:h-16" />
+        </a>
+
+        {/* Centered pill (desktop) */}
+        <ul className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-1 rounded-full border border-[color:var(--color-outline-variant)] bg-white/75 px-2 py-1.5 shadow-sm backdrop-blur-md lg:flex">
+          {menu.map((item) => {
+            const isActive = active === item.url;
+            return (
+              <li key={item.title}>
+                <a
+                  href={item.url}
+                  onClick={() => setActive(item.url)}
+                  className={cn(
+                    "relative inline-flex items-center rounded-full px-5 py-2 text-sm font-semibold transition-colors",
+                    isActive
+                      ? "text-[color:var(--color-forest-deep)]"
+                      : "text-[color:var(--color-granite-gray)] hover:text-[color:var(--color-forest-deep)]",
+                  )}
+                >
+                  {isActive && (
+                    <>
+                      {/* Active pill background */}
+                      <span className="absolute inset-0 -z-10 rounded-full bg-[color:var(--color-earth-linen)] shadow-sm" />
+                      {/* Tubelight indicator + glow */}
+                      <span className="absolute -top-1.5 left-1/2 h-1 w-8 -translate-x-1/2 rounded-full bg-[color:var(--color-sunset-vivid)]">
+                        <span className="absolute -top-2 left-1/2 h-6 w-12 -translate-x-1/2 rounded-full bg-[color:var(--color-sunset-vivid)]/30 blur-md" />
+                        <span className="absolute -top-1 left-1/2 h-4 w-8 -translate-x-1/2 rounded-full bg-[color:var(--color-sunset-vivid)]/20 blur-md" />
+                      </span>
+                    </>
+                  )}
+                  {item.title}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+
+        {/* Right side */}
+        <div className="flex shrink-0 items-center gap-2">
+          {cta && (
+            <a
+              href={cta.url}
+              className="hidden items-center gap-2 rounded-full bg-[color:var(--color-forest-deep)] px-5 py-2.5 font-mono text-[11px] uppercase tracking-widest text-white transition-colors hover:bg-[color:var(--color-sunset-vivid)] sm:inline-flex"
+            >
+              {cta.text}
             </a>
-            <div className="flex items-center">
-              <NavigationMenu className="[&_[data-radix-navigation-menu-viewport]]:rounded-3xl">
-                <NavigationMenuList className="rounded-3xl">
-                  {menu.map((item) => renderMenuItem(item))}
-                </NavigationMenuList>
-              </NavigationMenu>
-            </div>
-          </div>
+          )}
 
-          <div className="flex items-center gap-2">
-            {/* Search Button */}
-            {showSearch && (
-              <Button variant="ghost" size="icon" onClick={() => setOpenSearch(true)}>
-                <Search className="size-4" />
-              </Button>
-            )}
-
-            {/* Cart Button */}
-            {showCart && (
-              <Button variant="ghost" size="icon">
-                <ShoppingCart className="size-4" />
-              </Button>
-            )}
-
-            {/* Auth Buttons */}
-            {auth.login && (
-              <Button asChild variant="outline" size="sm">
-                <a href={auth.login.url}>{auth.login.text}</a>
-              </Button>
-            )}
-            <Button asChild size="sm">
-              <a href={auth.signup.url}>{auth.signup.text}</a>
-            </Button>
-          </div>
-        </nav>
-
-        {/* Mobile Navbar */}
-        <div className="block lg:hidden">
-          <div className="flex items-center justify-between">
-            <a href={logo.url} className="flex items-center gap-2">
-              <img src={logo.src} className="w-8" alt={logo.alt} />
-            </a>
-            <div className="flex items-center gap-2">
-              {/* Search button mobile */}
-              {showSearch && (
-                <Button variant="ghost" size="icon" onClick={() => setOpenSearch(true)}>
-                  <Search className="size-4" />
-                </Button>
-              )}
-
-              {/* Cart button mobile */}
-              {showCart && (
-                <Button variant="ghost" size="icon">
-                  <ShoppingCart className="size-4" />
-                </Button>
-              )}
-
-              {/* Menu Sheet */}
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <Menu className="size-4" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent className="overflow-y-auto">
-                  <SheetHeader>
-                    <SheetTitle>
-                      <a href={logo.url} className="flex items-center gap-2">
-                        <img src={logo.src} className="w-8" alt={logo.alt} />
-                      </a>
-                    </SheetTitle>
-                  </SheetHeader>
-                  <div className="my-6 flex flex-col gap-6">
-                    <Accordion type="single" collapsible className="flex w-full flex-col gap-4">
-                      {menu.map((item) => renderMobileMenuItem(item))}
-                    </Accordion>
-                    {mobileExtraLinks.length > 0 && (
-                      <div className="border-t border-gray-200 dark:border-gray-700 py-4">
-                        <div className="grid grid-cols-2 justify-start">
-                          {mobileExtraLinks.map((link, idx) => (
-                            <a
-                              key={idx}
-                              className="inline-flex h-10 items-center gap-2 whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-accent-foreground"
-                              href={link.url}
-                            >
-                              {link.name}
-                            </a>
-                          ))}
-                        </div>
-                      </div>
+          {/* Mobile menu trigger */}
+          <Sheet>
+            <SheetTrigger asChild>
+              <button
+                aria-label="Open menu"
+                className="inline-flex items-center justify-center rounded-full border border-[color:var(--color-outline-variant)] bg-white p-2.5 text-[color:var(--color-forest-deep)] shadow-sm lg:hidden"
+              >
+                <Menu className="size-5" />
+              </button>
+            </SheetTrigger>
+            <SheetContent className="overflow-y-auto">
+              <SheetHeader>
+                <SheetTitle>
+                  <a href={logo.url} className="flex items-center">
+                    <img src={logo.src} alt={logo.alt} className="h-12 w-auto object-contain" />
+                  </a>
+                </SheetTitle>
+              </SheetHeader>
+              <div className="mt-8 flex flex-col gap-1">
+                {menu.map((item) => (
+                  <a
+                    key={item.title}
+                    href={item.url}
+                    onClick={() => setActive(item.url)}
+                    className={cn(
+                      "rounded-lg px-4 py-3 text-base font-semibold transition-colors",
+                      active === item.url
+                        ? "bg-[color:var(--color-earth-linen)] text-[color:var(--color-forest-deep)]"
+                        : "text-[color:var(--color-granite-gray)] hover:bg-[color:var(--color-earth-linen)] hover:text-[color:var(--color-forest-deep)]",
                     )}
-                    <div className="flex flex-col gap-3">
-                      {auth.login && (
-                        <Button asChild variant="outline">
-                          <a href={auth.login.url}>{auth.login.text}</a>
-                        </Button>
-                      )}
-                      <Button asChild>
-                        <a href={auth.signup.url}>{auth.signup.text}</a>
-                      </Button>
-                    </div>
-                  </div>
-                </SheetContent>
-              </Sheet>
-            </div>
-          </div>
+                  >
+                    {item.title}
+                  </a>
+                ))}
+              </div>
+              {cta && (
+                <a
+                  href={cta.url}
+                  className="mt-6 inline-flex items-center justify-center rounded-full bg-[color:var(--color-forest-deep)] px-5 py-3 font-mono text-[11px] uppercase tracking-widest text-white transition-colors hover:bg-[color:var(--color-sunset-vivid)]"
+                >
+                  {cta.text}
+                </a>
+              )}
+            </SheetContent>
+          </Sheet>
         </div>
-      </div>
-
-      {/* Search Popup */}
-      <CommandDialog open={openSearch} onOpenChange={setOpenSearch}>
-        <CommandInput placeholder="Search products, blogs, resources..." />
-        <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup className="text-gray-500" heading="Suggestions">
-            <CommandItem className="text-gray-800 dark:text-gray-200">Latest Blog</CommandItem>
-            <CommandItem className="text-gray-800 dark:text-gray-200">Pricing Plans</CommandItem>
-            <CommandItem className="text-gray-800 dark:text-gray-200">Support</CommandItem>
-            <CommandItem className="text-gray-800 dark:text-gray-200">Careers</CommandItem>
-          </CommandGroup>
-        </CommandList>
-      </CommandDialog>
-    </section>
+      </nav>
+    </div>
   );
 }
-
-const renderMenuItem = (item: MenuItem) => {
-  if (item.items) {
-    return (
-      <NavigationMenuItem key={item.title} className="text-muted-foreground !rounded-3xl">
-        <NavigationMenuTrigger className="!rounded-3xl">{item.title}</NavigationMenuTrigger>
-        <NavigationMenuContent className="!rounded-3xl">
-          <ul className="w-80 p-3">
-            <NavigationMenuLink className="!rounded-3xl">
-              {item.items.map((subItem) => (
-                <li key={subItem.title}>
-                  <a
-                    className="flex select-none gap-4 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-muted hover:text-accent-foreground"
-                    href={subItem.url}
-                  >
-                    {subItem.icon}
-                    <div>
-                      <div className="text-sm font-semibold">{subItem.title}</div>
-                      {subItem.description && (
-                        <p className="text-sm leading-snug text-muted-foreground">
-                          {subItem.description}
-                        </p>
-                      )}
-                    </div>
-                  </a>
-                </li>
-              ))}
-            </NavigationMenuLink>
-          </ul>
-        </NavigationMenuContent>
-      </NavigationMenuItem>
-    );
-  }
-
-  return (
-    <a
-      key={item.title}
-      className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-accent-foreground"
-      href={item.url}
-    >
-      {item.title}
-    </a>
-  );
-};
-
-const renderMobileMenuItem = (item: MenuItem) => {
-  if (item.items) {
-    return (
-      <AccordionItem key={item.title} value={item.title} className="border-b-0">
-        <AccordionTrigger className="py-0 font-semibold hover:no-underline">
-          {item.title}
-        </AccordionTrigger>
-        <AccordionContent className="mt-2">
-          {item.items.map((subItem) => (
-            <a
-              key={subItem.title}
-              className="flex select-none gap-4 rounded-md p-3 leading-none outline-none transition-colors hover:bg-muted hover:text-accent-foreground"
-              href={subItem.url}
-            >
-              {subItem.icon}
-              <div>
-                <div className="text-sm font-semibold">{subItem.title}</div>
-                {subItem.description && (
-                  <p className="text-sm leading-snug text-muted-foreground">
-                    {subItem.description}
-                  </p>
-                )}
-              </div>
-            </a>
-          ))}
-        </AccordionContent>
-      </AccordionItem>
-    );
-  }
-
-  return (
-    <a key={item.title} href={item.url} className="font-semibold">
-      {item.title}
-    </a>
-  );
-};
