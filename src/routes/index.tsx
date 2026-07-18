@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import rappellerImg from "@/assets/rappeller.png";
 import logoColor from "@/assets/finding-trails-logo-color.png";
-import logoWhite from "@/assets/finding-trails-logo-white.png";
 import Navbar from "@/components/ui/navbar";
+import { SiteFooter } from "@/components/ui/footer-section";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -697,108 +697,6 @@ function CommunityCTA() {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="bg-[color:var(--color-forest-deep)] text-[color:var(--color-earth-linen)] w-full py-16 border-t border-[color:var(--color-granite-gray)]">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-4 md:px-10 max-w-[1280px] mx-auto">
-        <div className="md:col-span-2">
-          <img src={logoWhite} alt="Finding Trails" className="h-16 w-auto object-contain mb-4" />
-          <p className="max-w-sm text-white/70 mb-6">
-            Built for the wild. Curating premium expedition experiences in the Sahyadri and
-            Himalayas.
-          </p>
-          <div className="flex gap-4">
-            <a
-              href="https://www.facebook.com/profile.php?id=61569425964501"
-              aria-label="Facebook"
-              className="text-white/70 hover:text-[color:var(--color-sunset-vivid)] transition"
-            >
-              <Icon name="public" />
-            </a>
-            <a
-              href="https://www.instagram.com/finding.trails_/"
-              aria-label="Instagram"
-              className="text-white/70 hover:text-[color:var(--color-sunset-vivid)] transition"
-            >
-              <Icon name="photo_camera" />
-            </a>
-            <a
-              href="https://wa.me/919921380894"
-              aria-label="WhatsApp"
-              className="text-white/70 hover:text-[color:var(--color-sunset-vivid)] transition"
-            >
-              <Icon name="chat" />
-            </a>
-          </div>
-        </div>
-        <div>
-          <h4 className="font-mono text-[11px] uppercase tracking-widest text-white mb-4">
-            Explore
-          </h4>
-          <ul className="space-y-3 text-white/70">
-            <li>
-              <a href="#upcoming" className="hover:text-white transition">
-                Upcoming Treks
-              </a>
-            </li>
-            <li>
-              <a href="#gallery" className="hover:text-white transition">
-                Expedition Gallery
-              </a>
-            </li>
-            <li>
-              <a href="#about" className="hover:text-white transition">
-                Our Story
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-white transition">
-                Safety Protocols
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-mono text-[11px] uppercase tracking-widest text-white mb-4">
-            Contact
-          </h4>
-          <ul className="space-y-3 text-white/70">
-            <li className="flex items-start gap-2">
-              <Icon name="call" className="text-[16px] mt-1" />
-              <span>
-                +91 9921380894
-                <br />
-                +91 9405488089
-              </span>
-            </li>
-            <li className="flex items-center gap-2">
-              <Icon name="mail" className="text-[16px]" />
-              <span>info@findingtrails.in</span>
-            </li>
-            <li className="flex items-start gap-2 mt-4 pt-4 border-t border-white/15">
-              <Icon name="work" className="text-[16px] mt-1" />
-              <span className="text-sm">
-                Join Team:
-                <br />
-                findingtrails1@gmail.com
-              </span>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div className="px-4 md:px-10 max-w-[1280px] mx-auto mt-10 pt-6 border-t border-white/15 flex flex-col md:flex-row justify-between items-center text-white/60 text-sm">
-        <p>© 2024 Finding Trails Adventure Co. Built for the wild.</p>
-        <a
-          href="https://maps.app.goo.gl/QcLw7WwpTsFUT6GK9"
-          className="flex items-center gap-1 hover:text-[color:var(--color-sunset-vivid)] mt-2 md:mt-0 transition"
-        >
-          <Icon name="pin_drop" className="text-[16px]" /> Find Us On Google Maps
-        </a>
-      </div>
-    </footer>
-  );
-}
-
 function Index() {
   useReveal();
   return (
@@ -825,7 +723,7 @@ function Index() {
         <Founder />
         <CommunityCTA />
       </main>
-      <Footer />
+      <SiteFooter />
     </>
   );
 }
