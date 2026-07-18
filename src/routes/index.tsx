@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import rappellerAsset from "@/assets/rappeller.png.asset.json";
-import logoAsset from "@/assets/finding-trails-logo.png.asset.json";
+import rappellerImg from "@/assets/rappeller.png";
+import logoImg from "@/assets/finding-trails-logo.png";
 
 
 
@@ -25,7 +25,7 @@ const G3 =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuABMsP52ek_YAfG9ACT21ySfaXPdVjpiTlHDtglVukxaN_IFMgGmFU5Spd7-UxilBFKYIQFfXUKbZ71yRLTEdRKX73DtBWkhX6Z9mVZRA0VOX_I4IpvHr1TKfBVEtyvf4DJ39MpJYDh8hAs--RFTq1r45dHwOVvJZMYxpUPu7obwnl8cE8EZ2MrRaFohcwSMDTEUqTcbMsASkebMfpLnB-_R1G97t_B7QYc-zeTIQVis9GlWErdl9lG6ZJ_p82DAGQonM6E2gNST78";
 const FOUNDER =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuBEXZltuKrMwdBKLTCXmMcoEZl75cGhq8K8taBX_HRW31MMlFFLFemUMKT2h-Ne1nWUFTqfYUdweIKSRJLUyVII4DMp6dhkG9VDhI4SZzpAKjWqEk1hr9QvpcCNbQPF9tzKAH2gTI-QQ1wR5IT9llpB8sK2NQ8bM0a_dHS33azXG13qhnrpOdMSTif46JJZX7yoEyTd2m37SyUyf54xLISVkn_H5DSDX1CM8aAtUG4XO8iNgAYmvhe5jnyIkLbZ42iSFYQN5UpX_5w";
-const RAPPELLER = rappellerAsset.url;
+const RAPPELLER = rappellerImg;
 
 
 const GALLERY_TREK_1 =
@@ -156,7 +156,7 @@ function Nav() {
       <div className="max-w-[1280px] mx-auto flex justify-between items-center px-4 md:px-10 py-4">
         <a href="#top" className="flex items-center gap-2">
           <img
-            src={logoAsset.url}
+            src={logoImg}
             alt="Finding Trails"
             className="h-10 md:h-12 w-auto object-contain"
           />
