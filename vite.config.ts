@@ -12,4 +12,8 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Hard-pin the Nitro build target to Vercel for deploys from our own CI.
+  // This produces .vercel/output (Vercel Build Output API). Overrides here are
+  // ignored inside Lovable builds (forced to Cloudflare there), so it's safe.
+  nitro: { preset: "vercel" },
 });
