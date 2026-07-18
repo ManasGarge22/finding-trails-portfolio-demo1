@@ -562,19 +562,21 @@ function Gallery() {
       </div>
 
       {/* Horizontal scroller — glimpses */}
-      <div className="mt-10 flex gap-6 overflow-x-auto px-4 md:px-10 pb-4 snap-x snap-mandatory hide-scrollbar">
-        {[G1, G2, G3].map((src, i) => (
-          <div
-            key={i}
-            className="snap-center shrink-0 w-72 md:w-96 rounded-lg overflow-hidden border border-white/15"
-          >
-            <img
-              src={src}
-              alt={`Glimpse ${i + 1}`}
-              className="w-full h-[380px] object-cover grayscale-[15%] hover:grayscale-0 transition duration-500"
-            />
-          </div>
-        ))}
+      <div className="mt-10 overflow-x-auto pb-4 snap-x snap-mandatory hide-scrollbar">
+        <div className="mx-auto flex w-max gap-6 px-4 md:px-10">
+          {[G1, G2, G3].map((src, i) => (
+            <div
+              key={i}
+              className="snap-center shrink-0 w-72 md:w-96 rounded-lg overflow-hidden border border-white/15"
+            >
+              <img
+                src={src}
+                alt={`Glimpse ${i + 1}`}
+                className="w-full h-[380px] object-cover grayscale-[15%] hover:grayscale-0 transition duration-500"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
