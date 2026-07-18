@@ -1,0 +1,117 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Finding Trails brand tokens */
+  --color-earth-linen: #F9F7F2;
+  --color-forest-deep: #1A3C34;
+  --color-sunset-vivid: #FF7936;
+  --color-granite-gray: #4B5154;
+  --color-glacier-blue: #457B9D;
+  --color-on-surface: #181C1D;
+  --color-on-surface-variant: #414846;
+  --color-outline-variant: #C1C8C4;
+  --color-surface-container: #EBEEEF;
+
+  --font-display: "Sora", sans-serif;
+  --font-body: "Hanken Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: oklch(0.985 0.005 90);
+  --foreground: oklch(0.2 0.02 200);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.02 200);
+  --primary: oklch(0.32 0.05 165);
+  --primary-foreground: oklch(0.985 0.005 90);
+  --secondary: oklch(0.95 0.01 90);
+  --secondary-foreground: oklch(0.2 0.02 200);
+  --muted: oklch(0.95 0.01 90);
+  --muted-foreground: oklch(0.5 0.02 200);
+  --accent: oklch(0.7 0.18 45);
+  --accent-foreground: oklch(1 0 0);
+  --border: oklch(0.88 0.008 200);
+  --input: oklch(0.88 0.008 200);
+  --ring: oklch(0.7 0.18 45);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-earth-linen);
+    color: var(--color-on-surface);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+  }
+  ::selection {
+    background: var(--color-sunset-vivid);
+    color: #fff;
+  }
+}
+
+@utility glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@utility glass-overlay {
+  background: rgba(26, 60, 52, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+@keyframes ft-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ft-sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+.ft-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.ft-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
