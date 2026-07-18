@@ -4,6 +4,12 @@ import rappellerImg from "@/assets/rappeller.png";
 import logoColor from "@/assets/finding-trails-logo-color.png";
 import Navbar from "@/components/ui/navbar";
 import { SiteFooter } from "@/components/ui/footer-section";
+import {
+  ContainerAnimated,
+  ContainerStagger,
+  GalleryGrid,
+  GalleryGridCell,
+} from "@/components/ui/cta-section-with-gallery";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -35,9 +41,6 @@ const GALLERY_TREK_3 =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuAtCOcLG-jaCDYLnu9VBPaJkGOGVmL9a8xU3xKggQm4spd3tdAoeF5Sq84zCXBheQ2zEQPcSklAV3fn7K4oxMGzJju3dtYDMhefZR8aDj89YBpr93QYIcbJIV0tAvelEpqQUTOAGtWuDGM0c6iJ-qGkABCjBr8DqAX_9ToSnM0NiOWBjK9Nae2PyZPq7DcvWYocAtJvo2tf7PoT-Ry9Hc06YwnjnJzbCSixArpX8ZDaNZUjKH0oyDFCJZh6OmMGK-sBzJy89JPa5t0";
 const GALLERY_TREK_4 =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuDzNV6AxqQ8IociwMZ8-S6HgZYoRAtmZH_0x9uyPWUJrXd5VwNK8zEqgfZmYiK8tmjQisCGZRbNx8Zi3-tQApitBpFpOuLtcNKy9gW7krbnEUsbwhdo9vQMaLIJ1f9LLaXsDWyOpQOQpbbSQ3v134Okc-cQeoWei9M3B3KeqVye2kzXTTjwIfW2CmqjeC8RMr9o9Gm1fEE24KYqAXcA0GP-BItQapDTcwmmid9sl07KkPFNmK9tCAtCgfp6AwOjQZEktVqodb0imBM";
-const GALLERY_TREK_5 =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuDS36sxj1t9SoeduBnSOGeEZeO4Orw6pd15sn6I-0dnoQGNzGoZzG7KPJWR_oeQAcQ_fPjtgVAx7nt43nr9Jgjmasc6lM-iEkcZkzAd-8v6uATM5MlE2JXhj-Z9F--OGXoFLSGNBWM1iB7MdLNY1ONxWAJJiHrR2fr0RqZKRfP8f3Ox_4h6WTBkSkosgPAXH0Bm9cEO2j9iT7C1pMBQcc11PjPLJRoGtxMl8ZEmdt80J0PDStXBYHRoWwUYM5EmgMc2prQuTN9ghLk";
-
 const STARGAZING =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuDOB6VQkF9llw18llr51Ie-q4HoLYlxvYLutnWJAdtNv3HFolQjPRulThfGaZF7AXfs1kJiCzNTagOcSu_tyNV4Pif68LMwDAGup3o9D-2CDNc1p3QxrUEM9RKM1r25aPSFEwkvgei0mLvZC-CPPgp6avgpHSwnOI_kXN0cEffSmpFm53kzJt2LD7FW48lSumo7M0NiW6lbOEv1AYUclO06oKGux0zDq4i4_YSmM2ktn03pQjWwGg6zThSbgVPCCBy-ccBHyGrczNU";
 const HARISH =
@@ -513,51 +516,49 @@ function Gallery() {
       id="gallery"
       className="py-20 bg-[color:var(--color-forest-deep)] text-[color:var(--color-earth-linen)] overflow-hidden"
     >
-      <div className="px-4 md:px-10 max-w-[1280px] mx-auto mb-10 flex justify-between items-end ft-reveal">
-        <div>
-          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[color:var(--color-sunset-vivid)]">
+      <div className="mx-auto grid w-full max-w-[1280px] grid-cols-1 items-center gap-10 px-4 md:grid-cols-2 md:px-10">
+        <ContainerStagger>
+          <ContainerAnimated
+            index={0}
+            className="mb-4 block font-mono text-[11px] uppercase tracking-[0.3em] text-[color:var(--color-sunset-vivid)]"
+          >
             Basecamp Chronicles
-          </span>
-          <h2 className="mt-2 font-display font-bold text-3xl md:text-5xl text-white">
+          </ContainerAnimated>
+          <ContainerAnimated
+            index={1}
+            className="font-display text-3xl font-bold tracking-tight text-white md:text-5xl"
+          >
             Expedition Gallery
-          </h2>
-          <p className="text-white/70 mt-2">Moments captured in the wild.</p>
-        </div>
-      </div>
+          </ContainerAnimated>
+          <ContainerAnimated
+            index={2}
+            className="my-4 max-w-md text-base text-white/70 md:my-6 md:text-lg"
+          >
+            Moments captured in the wild — from summit pushes and star-lit camps to monsoon
+            ridgelines across the Sahyadri and Himalayas.
+          </ContainerAnimated>
+          <ContainerAnimated index={3}>
+            <a
+              href="#upcoming"
+              className="inline-flex items-center gap-2 rounded bg-[color:var(--color-sunset-vivid)] px-6 py-3 font-mono text-[11px] uppercase tracking-widest text-white transition hover:bg-white hover:text-[color:var(--color-forest-deep)]"
+            >
+              Join a Trek
+            </a>
+          </ContainerAnimated>
+        </ContainerStagger>
 
-      {/* Bento grid */}
-      <div className="px-4 md:px-10 max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 auto-rows-[220px] md:auto-rows-[280px] ft-reveal">
-        <GalleryTile
-          img={GALLERY_TREK_1}
-          category="Himalayas"
-          title="Summit Push"
-          className="md:col-span-8 md:row-span-2"
-        />
-        <GalleryTile
-          img={GALLERY_TREK_2}
-          category="Sahyadri"
-          title="Monsoon Ridges"
-          className="md:col-span-4 md:row-span-1"
-        />
-        <GalleryTile
-          img={GALLERY_TREK_3}
-          category="Night Camp"
-          title="Star Trails"
-          className="md:col-span-4 md:row-span-2"
-        />
-        <GalleryTile
-          img={GALLERY_TREK_4}
-          category="Ridgeline"
-          title="The Ridge"
-          className="md:col-span-8 md:row-span-1"
-        />
-        <GalleryTile
-          img={GALLERY_TREK_5}
-          category="Featured Story"
-          title="Basecamp Chronicles"
-          className="md:col-span-12 md:row-span-2 mt-2 md:mt-4"
-          wide
-        />
+        <GalleryGrid>
+          {[
+            { src: GALLERY_TREK_1, alt: "Summit push in the Himalayas" },
+            { src: GALLERY_TREK_2, alt: "Monsoon ridges of the Sahyadri" },
+            { src: GALLERY_TREK_3, alt: "Star trails over a night camp" },
+            { src: GALLERY_TREK_4, alt: "A high ridgeline" },
+          ].map((img, index) => (
+            <GalleryGridCell index={index} key={index}>
+              <img className="size-full object-cover object-center" src={img.src} alt={img.alt} />
+            </GalleryGridCell>
+          ))}
+        </GalleryGrid>
       </div>
 
       {/* Horizontal scroller — glimpses */}
@@ -576,43 +577,6 @@ function Gallery() {
         ))}
       </div>
     </section>
-  );
-}
-
-function GalleryTile({
-  img,
-  category,
-  title,
-  className = "",
-  wide = false,
-}: {
-  img: string;
-  category: string;
-  title: string;
-  className?: string;
-  wide?: boolean;
-}) {
-  return (
-    <div
-      className={`relative group overflow-hidden rounded-xl border border-white/10 shadow-lg ${className}`}
-    >
-      <img
-        src={img}
-        alt={title}
-        className="w-full h-full object-cover transition duration-700 group-hover:scale-105 group-hover:brightness-110"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--color-forest-deep)]/85 via-[color:var(--color-forest-deep)]/10 to-transparent" />
-      <div className={`absolute ${wide ? "bottom-8 left-8 right-8" : "bottom-4 left-4 right-4"}`}>
-        <span className="font-mono text-[10px] text-[color:var(--color-sunset-vivid)] uppercase tracking-[0.25em] block mb-1">
-          {category}
-        </span>
-        <h3
-          className={`font-display font-bold text-white ${wide ? "text-3xl md:text-4xl" : "text-lg md:text-xl"}`}
-        >
-          {title}
-        </h3>
-      </div>
-    </div>
   );
 }
 
