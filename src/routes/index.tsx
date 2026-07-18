@@ -2,8 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import rappellerImg from "@/assets/rappeller.png";
 import logoImg from "@/assets/finding-trails-logo.png";
-
-
+import Navbar from "@/components/ui/navbar";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -26,7 +25,6 @@ const G3 =
 const FOUNDER =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuBEXZltuKrMwdBKLTCXmMcoEZl75cGhq8K8taBX_HRW31MMlFFLFemUMKT2h-Ne1nWUFTqfYUdweIKSRJLUyVII4DMp6dhkG9VDhI4SZzpAKjWqEk1hr9QvpcCNbQPF9tzKAH2gTI-QQ1wR5IT9llpB8sK2NQ8bM0a_dHS33azXG13qhnrpOdMSTif46JJZX7yoEyTd2m37SyUyf54xLISVkn_H5DSDX1CM8aAtUG4XO8iNgAYmvhe5jnyIkLbZ42iSFYQN5UpX_5w";
 const RAPPELLER = rappellerImg;
-
 
 const GALLERY_TREK_1 =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuC3_L1-7aKdpUe_wPbCyY641s22xQ40rmLuvuSRVry1cbdDxsaXe1rjkLy5QhfbFg35hsvDRjzmUmqMg7BS39zN6oiePNST67C6UGgCtzl5fkIxwy8NaKBMv9u_6A1bKa2qF0mBOSQwioaaZgGDSUH9eDpfzNoPJCcm9A3Hl6YkHE15KI6EJca0Y6pLMYTefBbK4iRMKKuwiIk3yJhLjLW6hfoYzd7bdoNwN1NjnL-Sdlk70OS4Nn0wzKExtpj64t6E7nbp2VTRcig";
@@ -90,8 +88,7 @@ function Rappeller() {
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] rounded-full"
         style={{
           height: ropeHeight,
-          background:
-            "linear-gradient(to bottom, rgba(75,81,84,0.15), rgba(75,81,84,0.75))",
+          background: "linear-gradient(to bottom, rgba(75,81,84,0.15), rgba(75,81,84,0.75))",
         }}
       />
       {/* Anchor point at the very top */}
@@ -150,41 +147,6 @@ function Icon({ name, className = "" }: { name: string; className?: string }) {
   );
 }
 
-function Nav() {
-  return (
-    <nav className="fixed top-0 inset-x-0 z-50 bg-[color:var(--color-earth-linen)]/85 backdrop-blur-xl border-b border-[color:var(--color-outline-variant)]">
-      <div className="max-w-[1280px] mx-auto flex justify-between items-center px-4 md:px-10 py-4">
-        <a href="#top" className="flex items-center gap-2">
-          <img
-            src={logoImg}
-            alt="Finding Trails"
-            className="h-10 md:h-12 w-auto object-contain"
-          />
-        </a>
-        <div className="hidden md:flex items-center gap-8 text-[13px] font-medium uppercase tracking-widest text-[color:var(--color-granite-gray)]">
-          <a href="#trails" className="hover:text-[color:var(--color-sunset-vivid)] transition">Trails</a>
-          <a href="#upcoming" className="hover:text-[color:var(--color-sunset-vivid)] transition">Upcoming</a>
-          <a href="#gallery" className="hover:text-[color:var(--color-sunset-vivid)] transition">Gallery</a>
-          <a href="#about" className="hover:text-[color:var(--color-sunset-vivid)] transition">About Us</a>
-        </div>
-
-        <a
-          href="#upcoming"
-          className="hidden md:inline-flex items-center gap-2 bg-[color:var(--color-forest-deep)] text-white px-4 py-2 rounded font-mono text-[11px] uppercase tracking-widest hover:bg-[color:var(--color-sunset-vivid)] transition"
-        >
-          Book a Trek <Icon name="arrow_forward" className="text-[16px]" />
-        </a>
-        <button
-          aria-label="Menu"
-          className="md:hidden text-[color:var(--color-forest-deep)] p-2 bg-white rounded-full border border-[color:var(--color-outline-variant)] shadow-sm"
-        >
-          <Icon name="menu" />
-        </button>
-      </div>
-    </nav>
-  );
-}
-
 function Hero() {
   const [offset, setOffset] = useState(0);
   useEffect(() => {
@@ -217,21 +179,21 @@ function Hero() {
           }}
         />
       </div>
-      <div className="relative z-10 text-white w-full max-w-[1280px] mx-auto"
+      <div
+        className="relative z-10 text-white w-full max-w-[1280px] mx-auto"
         style={{ transform: `translate3d(0, ${offset * -0.15}px, 0)` }}
       >
         <span className="inline-block font-mono text-[11px] uppercase tracking-[0.3em] text-[color:var(--color-sunset-vivid)] mb-4 border border-white/20 bg-white/10 backdrop-blur px-3 py-1 rounded-full">
           Est. Sahyadri · Himalayas
         </span>
         <h1 className="font-display font-extrabold text-[40px] leading-[1.05] md:text-[64px] md:leading-[1.02] tracking-tight max-w-3xl drop-shadow-lg">
-          Find Your Trail,<br />
-          <span className="text-[color:var(--color-sunset-vivid)]">
-            Find Your Adventure
-          </span>
+          Find Your Trail,
+          <br />
+          <span className="text-[color:var(--color-sunset-vivid)]">Find Your Adventure</span>
         </h1>
         <p className="mt-5 text-white/90 text-lg max-w-xl">
-          Discover curated trekking expeditions and cultural experiences across
-          the wildest ridgelines in India.
+          Discover curated trekking expeditions and cultural experiences across the wildest
+          ridgelines in India.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <a
@@ -252,7 +214,6 @@ function Hero() {
   );
 }
 
-
 function Mission() {
   return (
     <section className="py-20 px-4 md:px-10 bg-white border-b border-[color:var(--color-outline-variant)] relative overflow-hidden">
@@ -272,9 +233,8 @@ function Mission() {
           Discover Your Next Adventure With Us
         </h2>
         <p className="mt-4 max-w-2xl mx-auto text-[color:var(--color-on-surface-variant)] text-lg">
-          Finding Trails curates trekking experiences across the Sahyadri and
-          Himalayas, blending adventure with cultural exploration for
-          unforgettable journeys.
+          Finding Trails curates trekking experiences across the Sahyadri and Himalayas, blending
+          adventure with cultural exploration for unforgettable journeys.
         </p>
       </div>
     </section>
@@ -373,8 +333,8 @@ function Upcoming() {
             Upcoming Treks
           </h2>
           <p className="mt-3 max-w-2xl text-[color:var(--color-granite-gray)] text-lg">
-            From the rugged peaks of the Himalayas to the lush trails of the
-            Sahyadris — your next adventure awaits.
+            From the rugged peaks of the Himalayas to the lush trails of the Sahyadris — your next
+            adventure awaits.
           </p>
         </div>
 
@@ -397,9 +357,7 @@ function Upcoming() {
                 </div>
               </div>
               <div>
-                <h3 className="font-display font-bold text-3xl mb-2">
-                  Sahyadri Stargazing Camp
-                </h3>
+                <h3 className="font-display font-bold text-3xl mb-2">Sahyadri Stargazing Camp</h3>
                 <div className="flex flex-wrap items-center gap-4 text-white/80 text-sm mb-4">
                   <span className="flex items-center gap-1">
                     <Icon name="location_on" className="text-[16px]" /> Rajmachi, Maharashtra
@@ -410,8 +368,8 @@ function Upcoming() {
                 </div>
                 <div className="flex justify-between items-end gap-4">
                   <p className="hidden md:block text-white/90 max-w-md">
-                    A night trek followed by an expert-guided astronomy session
-                    away from city lights.
+                    A night trek followed by an expert-guided astronomy session away from city
+                    lights.
                   </p>
                   <button className="bg-white text-[color:var(--color-forest-deep)] font-mono text-[11px] uppercase tracking-widest px-6 py-3 rounded hover:bg-[color:var(--color-sunset-vivid)] hover:text-white transition ml-auto shrink-0">
                     Book Now
@@ -482,8 +440,8 @@ function Upcoming() {
                 Andharban Forest Walk
               </h3>
               <p className="text-[color:var(--color-granite-gray)] mb-6">
-                A beautiful descent through the dark, dense forests of the
-                Sahyadris. Perfect for beginners and nature photographers.
+                A beautiful descent through the dark, dense forests of the Sahyadris. Perfect for
+                beginners and nature photographers.
               </p>
               <button className="w-max border border-[color:var(--color-granite-gray)] text-[color:var(--color-granite-gray)] font-mono text-[11px] uppercase tracking-widest px-8 py-3 rounded hover:bg-[color:var(--color-forest-deep)] hover:text-white hover:border-[color:var(--color-forest-deep)] transition">
                 Book Now
@@ -550,7 +508,10 @@ function TrekCard({
 
 function Gallery() {
   return (
-    <section id="gallery" className="py-20 bg-[color:var(--color-forest-deep)] text-[color:var(--color-earth-linen)] overflow-hidden">
+    <section
+      id="gallery"
+      className="py-20 bg-[color:var(--color-forest-deep)] text-[color:var(--color-earth-linen)] overflow-hidden"
+    >
       <div className="px-4 md:px-10 max-w-[1280px] mx-auto mb-10 flex justify-between items-end ft-reveal">
         <div>
           <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[color:var(--color-sunset-vivid)]">
@@ -565,11 +526,37 @@ function Gallery() {
 
       {/* Bento grid */}
       <div className="px-4 md:px-10 max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 auto-rows-[220px] md:auto-rows-[280px] ft-reveal">
-        <GalleryTile img={GALLERY_TREK_1} category="Himalayas" title="Summit Push" className="md:col-span-8 md:row-span-2" />
-        <GalleryTile img={GALLERY_TREK_2} category="Sahyadri" title="Monsoon Ridges" className="md:col-span-4 md:row-span-1" />
-        <GalleryTile img={GALLERY_TREK_3} category="Night Camp" title="Star Trails" className="md:col-span-4 md:row-span-2" />
-        <GalleryTile img={GALLERY_TREK_4} category="Ridgeline" title="The Ridge" className="md:col-span-8 md:row-span-1" />
-        <GalleryTile img={GALLERY_TREK_5} category="Featured Story" title="Basecamp Chronicles" className="md:col-span-12 md:row-span-2 mt-2 md:mt-4" wide />
+        <GalleryTile
+          img={GALLERY_TREK_1}
+          category="Himalayas"
+          title="Summit Push"
+          className="md:col-span-8 md:row-span-2"
+        />
+        <GalleryTile
+          img={GALLERY_TREK_2}
+          category="Sahyadri"
+          title="Monsoon Ridges"
+          className="md:col-span-4 md:row-span-1"
+        />
+        <GalleryTile
+          img={GALLERY_TREK_3}
+          category="Night Camp"
+          title="Star Trails"
+          className="md:col-span-4 md:row-span-2"
+        />
+        <GalleryTile
+          img={GALLERY_TREK_4}
+          category="Ridgeline"
+          title="The Ridge"
+          className="md:col-span-8 md:row-span-1"
+        />
+        <GalleryTile
+          img={GALLERY_TREK_5}
+          category="Featured Story"
+          title="Basecamp Chronicles"
+          className="md:col-span-12 md:row-span-2 mt-2 md:mt-4"
+          wide
+        />
       </div>
 
       {/* Horizontal scroller — glimpses */}
@@ -605,7 +592,9 @@ function GalleryTile({
   wide?: boolean;
 }) {
   return (
-    <div className={`relative group overflow-hidden rounded-xl border border-white/10 shadow-lg ${className}`}>
+    <div
+      className={`relative group overflow-hidden rounded-xl border border-white/10 shadow-lg ${className}`}
+    >
       <img
         src={img}
         alt={title}
@@ -616,7 +605,9 @@ function GalleryTile({
         <span className="font-mono text-[10px] text-[color:var(--color-sunset-vivid)] uppercase tracking-[0.25em] block mb-1">
           {category}
         </span>
-        <h3 className={`font-display font-bold text-white ${wide ? "text-3xl md:text-4xl" : "text-lg md:text-xl"}`}>
+        <h3
+          className={`font-display font-bold text-white ${wide ? "text-3xl md:text-4xl" : "text-lg md:text-xl"}`}
+        >
           {title}
         </h3>
       </div>
@@ -626,7 +617,10 @@ function GalleryTile({
 
 function Founder() {
   return (
-    <section id="about" className="py-20 px-4 md:px-10 bg-white border-y border-[color:var(--color-outline-variant)]">
+    <section
+      id="about"
+      className="py-20 px-4 md:px-10 bg-white border-y border-[color:var(--color-outline-variant)]"
+    >
       <div className="max-w-[1280px] mx-auto ft-reveal">
         <div className="text-center mb-12">
           <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[color:var(--color-granite-gray)]">
@@ -637,42 +631,42 @@ function Founder() {
           </h2>
         </div>
         <div className="flex flex-col md:flex-row gap-12 items-center">
-        <div className="w-full md:w-1/2 relative">
-          <div className="absolute -inset-4 border border-[color:var(--color-granite-gray)]/20 rounded-xl z-0" />
-          <div className="relative z-10 aspect-[4/3] rounded-lg overflow-hidden border border-[color:var(--color-outline-variant)] shadow-md">
-            <img src={FOUNDER} alt="Yash Hange, Founder" className="w-full h-full object-cover" />
+          <div className="w-full md:w-1/2 relative">
+            <div className="absolute -inset-4 border border-[color:var(--color-granite-gray)]/20 rounded-xl z-0" />
+            <div className="relative z-10 aspect-[4/3] rounded-lg overflow-hidden border border-[color:var(--color-outline-variant)] shadow-md">
+              <img src={FOUNDER} alt="Yash Hange, Founder" className="w-full h-full object-cover" />
+            </div>
+            <div className="absolute -bottom-4 -right-4 bg-[color:var(--color-sunset-vivid)] text-white p-3 rounded-lg shadow-lg z-20 flex items-center gap-2 border border-white">
+              <Icon name="verified" />
+              <span className="font-mono text-[11px] uppercase tracking-widest">
+                BMC · AMC · SNR
+              </span>
+            </div>
           </div>
-          <div className="absolute -bottom-4 -right-4 bg-[color:var(--color-sunset-vivid)] text-white p-3 rounded-lg shadow-lg z-20 flex items-center gap-2 border border-white">
-            <Icon name="verified" />
-            <span className="font-mono text-[11px] uppercase tracking-widest">BMC · AMC · SNR</span>
+          <div className="w-full md:w-1/2">
+            <h2 className="font-display font-bold text-[color:var(--color-forest-deep)] text-3xl md:text-4xl mb-2">
+              Yash Hange
+            </h2>
+            <p className="font-mono text-[11px] tracking-widest uppercase text-[color:var(--color-sunset-vivid)] font-bold mb-6">
+              Founder &amp; Lead Explorer
+            </p>
+            <p className="border-l-2 border-[color:var(--color-sunset-vivid)] pl-4 text-[color:var(--color-on-surface-variant)] text-lg mb-6">
+              Certified mountaineer leading expeditions with safety and passion. Dedicated to
+              uncovering the raw beauty of high-altitude trails while upholding professional
+              expedition standards.
+            </p>
+            <a
+              href="https://www.instagram.com/mountaineer_on_wheels/"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 border border-[color:var(--color-granite-gray)] text-[color:var(--color-forest-deep)] px-4 py-2 rounded font-mono text-[11px] uppercase tracking-widest hover:bg-[color:var(--color-forest-deep)] hover:text-white transition"
+            >
+              Follow on Instagram <Icon name="open_in_new" className="text-[16px]" />
+            </a>
           </div>
-        </div>
-        <div className="w-full md:w-1/2">
-
-          <h2 className="font-display font-bold text-[color:var(--color-forest-deep)] text-3xl md:text-4xl mb-2">
-            Yash Hange
-          </h2>
-          <p className="font-mono text-[11px] tracking-widest uppercase text-[color:var(--color-sunset-vivid)] font-bold mb-6">
-            Founder &amp; Lead Explorer
-          </p>
-          <p className="border-l-2 border-[color:var(--color-sunset-vivid)] pl-4 text-[color:var(--color-on-surface-variant)] text-lg mb-6">
-            Certified mountaineer leading expeditions with safety and passion.
-            Dedicated to uncovering the raw beauty of high-altitude trails while
-            upholding professional expedition standards.
-          </p>
-          <a
-            href="https://www.instagram.com/mountaineer_on_wheels/"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 border border-[color:var(--color-granite-gray)] text-[color:var(--color-forest-deep)] px-4 py-2 rounded font-mono text-[11px] uppercase tracking-widest hover:bg-[color:var(--color-forest-deep)] hover:text-white transition"
-          >
-            Follow on Instagram <Icon name="open_in_new" className="text-[16px]" />
-          </a>
-        </div>
         </div>
       </div>
     </section>
-
   );
 }
 
@@ -711,36 +705,72 @@ function Footer() {
             Finding Trails
           </h2>
           <p className="max-w-sm text-white/70 mb-6">
-            Built for the wild. Curating premium expedition experiences in the
-            Sahyadri and Himalayas.
+            Built for the wild. Curating premium expedition experiences in the Sahyadri and
+            Himalayas.
           </p>
           <div className="flex gap-4">
-            <a href="https://www.facebook.com/profile.php?id=61569425964501" aria-label="Facebook" className="text-white/70 hover:text-[color:var(--color-sunset-vivid)] transition">
+            <a
+              href="https://www.facebook.com/profile.php?id=61569425964501"
+              aria-label="Facebook"
+              className="text-white/70 hover:text-[color:var(--color-sunset-vivid)] transition"
+            >
               <Icon name="public" />
             </a>
-            <a href="https://www.instagram.com/finding.trails_/" aria-label="Instagram" className="text-white/70 hover:text-[color:var(--color-sunset-vivid)] transition">
+            <a
+              href="https://www.instagram.com/finding.trails_/"
+              aria-label="Instagram"
+              className="text-white/70 hover:text-[color:var(--color-sunset-vivid)] transition"
+            >
               <Icon name="photo_camera" />
             </a>
-            <a href="https://wa.me/919921380894" aria-label="WhatsApp" className="text-white/70 hover:text-[color:var(--color-sunset-vivid)] transition">
+            <a
+              href="https://wa.me/919921380894"
+              aria-label="WhatsApp"
+              className="text-white/70 hover:text-[color:var(--color-sunset-vivid)] transition"
+            >
               <Icon name="chat" />
             </a>
           </div>
         </div>
         <div>
-          <h4 className="font-mono text-[11px] uppercase tracking-widest text-white mb-4">Explore</h4>
+          <h4 className="font-mono text-[11px] uppercase tracking-widest text-white mb-4">
+            Explore
+          </h4>
           <ul className="space-y-3 text-white/70">
-            <li><a href="#upcoming" className="hover:text-white transition">Upcoming Treks</a></li>
-            <li><a href="#gallery" className="hover:text-white transition">Expedition Gallery</a></li>
-            <li><a href="#about" className="hover:text-white transition">Our Story</a></li>
-            <li><a href="#" className="hover:text-white transition">Safety Protocols</a></li>
+            <li>
+              <a href="#upcoming" className="hover:text-white transition">
+                Upcoming Treks
+              </a>
+            </li>
+            <li>
+              <a href="#gallery" className="hover:text-white transition">
+                Expedition Gallery
+              </a>
+            </li>
+            <li>
+              <a href="#about" className="hover:text-white transition">
+                Our Story
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-white transition">
+                Safety Protocols
+              </a>
+            </li>
           </ul>
         </div>
         <div>
-          <h4 className="font-mono text-[11px] uppercase tracking-widest text-white mb-4">Contact</h4>
+          <h4 className="font-mono text-[11px] uppercase tracking-widest text-white mb-4">
+            Contact
+          </h4>
           <ul className="space-y-3 text-white/70">
             <li className="flex items-start gap-2">
               <Icon name="call" className="text-[16px] mt-1" />
-              <span>+91 9921380894<br />+91 9405488089</span>
+              <span>
+                +91 9921380894
+                <br />
+                +91 9405488089
+              </span>
             </li>
             <li className="flex items-center gap-2">
               <Icon name="mail" className="text-[16px]" />
@@ -748,7 +778,11 @@ function Footer() {
             </li>
             <li className="flex items-start gap-2 mt-4 pt-4 border-t border-white/15">
               <Icon name="work" className="text-[16px] mt-1" />
-              <span className="text-sm">Join Team:<br />findingtrails1@gmail.com</span>
+              <span className="text-sm">
+                Join Team:
+                <br />
+                findingtrails1@gmail.com
+              </span>
             </li>
           </ul>
         </div>
@@ -771,7 +805,25 @@ function Index() {
   return (
     <>
       <Rappeller />
-      <Nav />
+      <header className="fixed top-0 inset-x-0 z-50 bg-[color:var(--color-earth-linen)]/85 backdrop-blur-xl border-b border-[color:var(--color-outline-variant)]">
+        <Navbar
+          showCart={false}
+          logo={{
+            url: "#top",
+            src: logoImg,
+            alt: "Finding Trails",
+            title: "Finding Trails",
+          }}
+          menu={[
+            { title: "Trails", url: "#trails" },
+            { title: "Upcoming", url: "#upcoming" },
+            { title: "Gallery", url: "#gallery" },
+            { title: "About Us", url: "#about" },
+          ]}
+          mobileExtraLinks={[]}
+          auth={{ signup: { text: "Book a Trek", url: "#upcoming" } }}
+        />
+      </header>
       <main>
         <Hero />
         <Mission />
