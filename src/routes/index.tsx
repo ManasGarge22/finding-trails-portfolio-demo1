@@ -95,8 +95,28 @@ function Rappeller() {
           background: "linear-gradient(to bottom, rgba(75,81,84,0.15), rgba(75,81,84,0.75))",
         }}
       />
-      {/* Anchor point at the very top */}
-      <div className="absolute top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[color:var(--color-forest-deep)] shadow" />
+      {/* Cliff edge the rope is anchored to */}
+      <svg
+        viewBox="0 0 48 26"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-12 md:w-14 drop-shadow-[0_3px_4px_rgba(0,0,0,0.25)]"
+        fill="none"
+      >
+        {/* Rock mass, jagged underside */}
+        <path
+          d="M0 0h48v9l-4.5 3.5-4 -1.5-3.5 4.5-4-2-3 6-4-3.5-3.5 2-3-5.5-4 3-3.5-2.5-4 1.5-3.5-3.5L0 13Z"
+          fill="var(--color-forest-deep)"
+        />
+        {/* Lit top face */}
+        <path d="M0 0h48v3.5H0Z" fill="rgba(255,255,255,0.16)" />
+        {/* Anchor peg + sling the rope hangs from */}
+        <rect x="21" y="8" width="6" height="3" rx="1.5" fill="var(--color-sunset-vivid)" />
+        <path
+          d="M24 11v4"
+          stroke="rgba(75,81,84,0.75)"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+      </svg>
       {/* Climber */}
       <div
         className="absolute left-1/2 -translate-x-1/2"
